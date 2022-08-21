@@ -12,13 +12,15 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState>{
     on<LoadIntialHomeEvent>((event, emit) async {
       List<Featured?> featured;
     List<Newest> newest;
+    List<Featured?> all;
      emit( HomepageLoadingState());
         print("then here");
-        featured = await repository.getFeatured();
-        print(featured);
-        newest = await repository.getNewest();
+        // featured = await repository.getFeatured();
+        // print(featured);
+        // newest = await repository.getNewest();
+        all = await repository.getAll();
         print("newessst");
-        emit( HomepageLoadedState(featured: featured, newest: newest));
+        emit( HomepageLoadedState(featured: [], newest: [], all: all));
     });
   }
 

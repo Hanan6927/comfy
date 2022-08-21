@@ -37,6 +37,9 @@ dependencies:
   flutter_image_slideshow: any
   flutter_bloc: 
   http: ^0.13.4
+  shimmer: ^2.0.0
+  intl_phone_number_input: ^0.7.0+2
+  json_annotation: ^4.6.0
   
 
 

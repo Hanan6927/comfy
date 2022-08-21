@@ -23,11 +23,12 @@ class FailedHomePageState extends HomepageState {
 class HomepageLoadedState extends HomepageState{
   List<Featured?> featured;
   List<Newest> newest;
+  List<Featured?> all;
 
-  HomepageLoadedState({required this.featured, required this.newest});
+  HomepageLoadedState({required this.featured, required this.newest, required this.all});
 
   @override
   // TODO: implement props
-  List<Object?> get props => [featured, newest];
+  List<Object?> get props => [featured, newest, all];
 
 }

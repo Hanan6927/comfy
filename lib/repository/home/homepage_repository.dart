@@ -14,5 +14,9 @@ class HomepageRepository {
   Future<List<Newest>> getNewest() async {
     return homepageProvider.getNewest();
   }
+
+  Future<List<Featured?>> getAll() async {
+    return homepageProvider.getAll();
+  }
   
 }

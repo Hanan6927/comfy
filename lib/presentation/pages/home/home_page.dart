@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../application/home/homepage_event.dart';
 import '../../core/constants.dart';
+import '../category/category.dart';
 import 'horizontal_list.dart';
 
 class Home extends StatefulWidget {
@@ -22,14 +23,28 @@ class _HomeState extends State<Home> {
      
     return BlocConsumer<HomepageBloc, HomepageState>(builder: (context, homepageState){
       if (homepageState is HomepageLoadingState){
-         return const Center(
-            child: CircularProgressIndicator(),
-          );
+         return ListView(
+           children: [
+             Image(
+            image: const AssetImage("assets/images/b1.jpg"),
+            fit: BoxFit.cover,
+          ),
+          Padding(
+            padding: const EdgeInsets.all(15.0),
+            child: Row(children: [
+              Expanded(child: category(Color.fromARGB(255, 190, 33, 119), Icons.boy_outlined, "Men")),
+              Expanded(child: category(Color.fromARGB(255, 104, 154, 196), Icons.girl, "Women")),
+              Expanded(child: category(Colors.orange, Icons.child_care, "Kid"))
+            ],),
+          ),
+          CustomShimmer()
+          
+           ],
+         );
       }
        
       if (homepageState is HomepageLoadedState){
-        var featured = homepageState.featured;
-        var newest = homepageState.newest;
+        var all = homepageState.all;
 
         return RefreshIndicator(onRefresh: () async {
               homepageBloc.add(LoadIntialHomeEvent());
@@ -50,12 +65,10 @@ class _HomeState extends State<Home> {
               Expanded(child: category(Colors.orange, Icons.child_care, "Kid"))
             ],),
           ),
-          Lists.lists("Newest Arrival", context),
-          HorizontalList(anylist: newest,),
-          Lists.lists("Featured Products", context),
-          HorizontalList(anylist: featured,),
+          HorizontalList(anylist: all,),
         ],
-      ),);
+      ),
+      );
       }
        return RefreshIndicator(
           onRefresh: () async {
@@ -66,8 +79,8 @@ class _HomeState extends State<Home> {
               padding: const EdgeInsets.only(top: 70.0),
               child: ListView(
                   physics: const AlwaysScrollableScrollPhysics(),
-                  children: [
-                    const Center(
+                  children: const [
+                    Center(
                         child: Text("Drag Down to see changes",
                             style: TextStyle(fontSize: 16.0)))
                   ]),
